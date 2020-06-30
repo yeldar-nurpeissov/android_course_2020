@@ -6,36 +6,42 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import kotlinx.android.synthetic.main.activity_main.*
 
-// MVC Model (DB) - View (xml) - Controller (Activity/Fragment)
-// maintainability, testability
+// MVP Model (DB) - View (Activity/Fragment) - Presenter (..)
+// testing
+//
+// presenter knows about view, no states
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
 
-    private val repository = Repository()
+    private val presenter: MainPresenter = MainPresenterImpl(this, Repository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         editText.doAfterTextChanged {
-            repository.onTextChanged(it.toString())
+            presenter.onTextChanged(it.toString())
         }
 
         button.setOnClickListener {
-            val text = editText.text.toString()
-            val formattedText = repository.formatText(text)
-            Toast.makeText(this, formattedText, Toast.LENGTH_SHORT).show()
+            presenter.onButtonClicked()
         }
+    }
+
+    override fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
 
 // Model
 class Repository {
-    fun formatText(text: String): String {
+    private var text: String = ""
+
+    fun formatText(): String {
         return "$text $text"
     }
 
     fun onTextChanged(text: String) {
-
+        this.text = text
     }
 }
