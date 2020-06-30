@@ -8,10 +8,10 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
 
-// MVVM: Model (DB) - View (Activity/Fragment || xml) - ViewModel(..)
-// no view reference, state
+// MVI: Model (DB) - View (Activity/Fragment || xml) - Intent(..)
+// single state, single entry point
 
-// lot of entry points and states, no machine state
+// no history of states
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,19 +22,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         editText.doAfterTextChanged {
-            viewModel.onTextChanged(it.toString())
+            viewModel.onAction(MainAction.TextChanged(it.toString()))
         }
 
         button.setOnClickListener {
-            viewModel.onButtonClicked()
+            viewModel.onAction(MainAction.ButtonClick)
         }
 
-        viewModel.toastEvent.observe(this, Observer { message ->
-            showToast(message ?: "Null message")
-        })
-
-        viewModel.loadingState.observe(this, Observer {
-            progressBar.isVisible = it ?: false
+        viewModel.mainState.observe(this, Observer { state ->
+            when (state) {
+                is MainState.Loading -> progressBar.isVisible = state.isLoading
+                is MainState.ToastEvent -> showToast(state.message)
+            }
         })
     }
 
