@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Architecture</string>
+    <string name="next">Next</string>
+    <string name="mvi">MVI</string>
+    <string name="mvp">MVP</string>
+    <string name="mvvm">MVVM</string>
 </resources>
