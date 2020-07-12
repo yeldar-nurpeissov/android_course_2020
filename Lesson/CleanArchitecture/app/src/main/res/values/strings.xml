@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">CleanArchitecture</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="next">Next</string>
+    <string name="dd_mm_yyyy">DD/MM/YYYY</string>
+    <string name="height">Height</string>
+    <string name="about_yourself">About yourself</string>
+    <string name="submit">Submit</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="weight">Weight</string>
+    <string name="are_you_sure">Are you sure?</string>
+</resources>
