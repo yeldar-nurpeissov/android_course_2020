@@ -7,10 +7,13 @@ import androidx.lifecycle.Observer
 import com.example.solid.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModel {
+        parametersOf(true)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

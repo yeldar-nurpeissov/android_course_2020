@@ -33,9 +33,10 @@ val mainModule = module {
         )
     }
 
-    viewModel {
+    viewModel { (isEditing: Boolean) ->
         MainViewModel(
-            formatUseCase = get()
+            formatUseCase = get(),
+            isEditing = isEditing
         )
     }
 }
