@@ -1,19 +1,16 @@
 package com.example.solid.main.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.solid.R
-import com.example.solid.core.NetworkInfo
-import com.example.solid.main.data.*
-import com.example.solid.main.domain.FormatUseCase
-import com.example.solid.main.domain.MainRepository
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: ViewModel = getViewModel()
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,23 +24,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-fun getViewModel(): ViewModel {
-    val useCase = FormatUseCase(getRepo())
-
-    return ViewModel(useCase)
-}
-
-fun getRepo(): MainRepository = MainRepositoryImpl(
-    networkInfo = getNetworkInfo(),
-    remoteDataSource = MainRemoteDataSource(),
-    localDataSource = MainSharedPrefDataSource()
-)
-
-fun getNetworkInfo(): NetworkInfo {
-    return object : NetworkInfo {
-        override fun isConnected(): Boolean = false
-    }
-}
 
 // Presentation
 // Domain

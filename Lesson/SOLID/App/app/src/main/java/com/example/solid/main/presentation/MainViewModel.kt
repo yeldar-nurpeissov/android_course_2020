@@ -1,12 +1,12 @@
 package com.example.solid.main.presentation
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.solid.main.domain.FormatUseCase
 
-class ViewModel(
+class MainViewModel(
     private val formatUseCase: FormatUseCase
-) {
+) : ViewModel() {
 
     val liveData = MutableLiveData<String>()
 
