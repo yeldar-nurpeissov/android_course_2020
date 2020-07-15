@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.resume.presentation.ShowActivity">
+    tools:context=".feature.resume.presentation.profile.ProfileActivity">
 
     <TextView
         android:id="@+id/wholeInfoTextView"

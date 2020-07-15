@@ -1,37 +1,38 @@
-package com.example.cleanarchitecture.feature.resume.presentation
+package com.example.cleanarchitecture.feature.resume.presentation.edit
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Slide
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import com.example.cleanarchitecture.R
-import com.example.cleanarchitecture.core.DI
-import com.example.cleanarchitecture.feature.resume.presentation.adapter.SlidePagerAdapter
+import com.example.cleanarchitecture.feature.resume.presentation.edit.adapter.SlidePagerAdapter
+import com.example.cleanarchitecture.feature.resume.presentation.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_slide.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class SlideActivity : AppCompatActivity() {
+class EditActivity : AppCompatActivity() {
 
-    private var di: DI? = null
-
-    private val viewModel: SlideViewModel by viewModels{
-        val isEditing = intent?.getBooleanExtra(ShowActivity.EDITING_STATE_KEY, false) ?: false
-        SlideViewModelFactory(di!!.getSaveUseCase(), isEditing)
+    private val viewModel: SlideViewModel by viewModel{
+        parametersOf(intent?.getBooleanExtra(EDITING_STATE_KEY, false) ?: false)
     }
 
     companion object{
         const val NUM_PAGES = 3
+        const val EDITING_STATE_KEY = "Edit mode"
+
+        fun intent(context: Context, isEditing: Boolean) : Intent {
+            return Intent(context, EditActivity::class.java).also {
+                it.putExtra(EDITING_STATE_KEY, isEditing)
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_slide)
-
-        di = DI()
-        di?.inject(this)
 
         setViewPager()
         setListeners()
@@ -48,7 +49,7 @@ class SlideActivity : AppCompatActivity() {
     }
 
     private fun nextActivity() {
-        startActivity(Intent(this, ShowActivity::class.java))
+        startActivity(Intent(this, ProfileActivity::class.java))
         finish()
     }
 

@@ -1,7 +1,6 @@
-package com.example.cleanarchitecture.feature.resume.presentation
+package com.example.cleanarchitecture.feature.resume.presentation.profile
 
 import android.content.DialogInterface
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -9,29 +8,18 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.example.cleanarchitecture.R
-import com.example.cleanarchitecture.core.DI
 import com.example.cleanarchitecture.core.ResumeFormatter
 import com.example.cleanarchitecture.feature.resume.data.entity.Resume
+import com.example.cleanarchitecture.feature.resume.presentation.edit.EditActivity
 import kotlinx.android.synthetic.main.activity_show.*
 
-class ShowActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
 
-    companion object{
-        const val EDITING_STATE_KEY = "Edit mode"
-    }
-
-    private var di: DI? = null
-
-    private val viewModel: ShowViewModel by viewModels {
-        ShowViewModelFactory(di!!.getShowUseCase())
-    }
+    private val viewModel: ShowViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show)
-
-        di = DI()
-        di?.inject(this)
 
         setListeners()
         setObservers()
@@ -56,11 +44,7 @@ class ShowActivity : AppCompatActivity() {
     }
 
     private fun goToSlideActivity(withEditing: Boolean){
-        startActivity(
-            Intent(this, SlideActivity::class.java).also {
-                it.putExtra(ShowActivity.EDITING_STATE_KEY, withEditing)
-            }
-        )
+        startActivity(EditActivity.intent(this, withEditing))
         finish()
     }
 

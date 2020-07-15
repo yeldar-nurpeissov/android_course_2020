@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.resume.presentation.fragments
+package com.example.cleanarchitecture.feature.resume.presentation.edit.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.cleanarchitecture.R
-import com.example.cleanarchitecture.feature.resume.presentation.SlideState
-import com.example.cleanarchitecture.feature.resume.presentation.SlideViewModel
-import com.example.cleanarchitecture.feature.resume.presentation.SlideViewModelFactory
+import com.example.cleanarchitecture.feature.resume.presentation.edit.SlideState
+import com.example.cleanarchitecture.feature.resume.presentation.edit.SlideViewModel
 import kotlinx.android.synthetic.main.slider_first_fragment.view.*
-import kotlinx.android.synthetic.main.slider_second_fragment.view.*
 
-class SliderFirstScreenFragment : Fragment() {
+class FullNameFragment : Fragment() {
 
     private val viewModel: SlideViewModel by activityViewModels()
 
@@ -43,9 +41,9 @@ class SliderFirstScreenFragment : Fragment() {
         }
     }
 
-    private fun setObserver(view: View){
-        viewModel.slideState.observe(viewLifecycleOwner, Observer{
-            when(it){
+    private fun setObserver(view: View) {
+        viewModel.slideState.observe(viewLifecycleOwner, Observer {
+            when (it) {
                 is SlideState.FillTheBlanks -> {
                     view.firstNameEditText.setText(it.resume.firstName)
                     view.lastNameEditText.setText(it.resume.lastName)

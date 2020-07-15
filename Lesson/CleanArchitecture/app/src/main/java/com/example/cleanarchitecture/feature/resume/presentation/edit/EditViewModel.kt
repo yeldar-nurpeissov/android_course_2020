@@ -1,16 +1,17 @@
-package com.example.cleanarchitecture.feature.resume.presentation
+package com.example.cleanarchitecture.feature.resume.presentation.edit
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.cleanarchitecture.core.ExecuteCondition
 import com.example.cleanarchitecture.feature.resume.data.entity.Resume
-import com.example.cleanarchitecture.feature.resume.domain.ResumeUseCase
+import com.example.cleanarchitecture.feature.resume.domain.RetrieveResumeUseCase
+import com.example.cleanarchitecture.feature.resume.domain.SaveResumeUseCase
 
 class SlideViewModel(
-    private val resumeUseCase: ResumeUseCase,
+    private val saveResumeUseCase: SaveResumeUseCase,
+    private val retrieveResumeUseCase: RetrieveResumeUseCase,
     private val isEditing: Boolean
 ) : ViewModel(){
 
@@ -20,14 +21,18 @@ class SlideViewModel(
     private var resume: Resume
 
     init {
-        val res = resumeUseCase.retrieve()
+        val res = retrieveResumeUseCase()
 
         if (res != null && !isEditing) {
             resume = res
-            _slideState.value = SlideState.NextActivity
+            _slideState.value =
+                SlideState.NextActivity
         }else{
             resume = res ?: Resume()
-            _slideState.value = SlideState.FillTheBlanks(resume)
+            _slideState.value =
+                SlideState.FillTheBlanks(
+                    resume
+                )
         }
     }
 
@@ -59,45 +64,57 @@ class SlideViewModel(
         Log.i("SlideViewModel", "$resume")
 
         if (resume.firstName.isBlank()){
-            _slideState.value = SlideState.ValidationError("Fill First Name")
+            _slideState.value =
+                SlideState.ValidationError(
+                    "Fill First Name"
+                )
             return
         }
         if (resume.lastName.isBlank()){
-            _slideState.value = SlideState.ValidationError("Fill Last Name")
+            _slideState.value =
+                SlideState.ValidationError(
+                    "Fill Last Name"
+                )
             return
         }
         if (resume.birthday.isBlank()){
-            _slideState.value = SlideState.ValidationError("Fill Birthday")
+            _slideState.value =
+                SlideState.ValidationError(
+                    "Fill Birthday"
+                )
             return
         }
         if (resume.height <= 0){
-            _slideState.value = SlideState.ValidationError("Fill Height")
+            _slideState.value =
+                SlideState.ValidationError(
+                    "Fill Height"
+                )
             return
         }
         if (resume.weight <= 0){
-            _slideState.value = SlideState.ValidationError("Fill Weight")
+            _slideState.value =
+                SlideState.ValidationError(
+                    "Fill Weight"
+                )
             return
         }
         if (resume.aboutMe.isBlank()){
-            _slideState.value = SlideState.ValidationError("Fill About Yourself")
+            _slideState.value =
+                SlideState.ValidationError(
+                    "Fill About Yourself"
+                )
             return
         }
 
-        when(val execution = resumeUseCase.save(resume)){
-            is ExecuteCondition.Success -> _slideState.value = SlideState.NextActivity
-            is ExecuteCondition.Error -> _slideState.value = SlideState.Error(execution.err.message!!)
+        when(val execution = saveResumeUseCase(resume)){
+            is ExecuteCondition.Success -> _slideState.value =
+                SlideState.NextActivity
+            is ExecuteCondition.Error -> _slideState.value =
+                SlideState.Error(
+                    execution.err.message!!
+                )
         }
     }
-}
-
-class SlideViewModelFactory(
-    private val saveResumeUseCase: ResumeUseCase,
-    private val isEditing: Boolean
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SlideViewModel(saveResumeUseCase, isEditing) as T
-    }
-
 }
 
 sealed class SlideState{

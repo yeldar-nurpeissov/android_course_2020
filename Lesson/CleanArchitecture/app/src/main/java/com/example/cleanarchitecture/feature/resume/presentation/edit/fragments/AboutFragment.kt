@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.feature.resume.presentation.fragments
+package com.example.cleanarchitecture.feature.resume.presentation.edit.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.cleanarchitecture.R
-import com.example.cleanarchitecture.feature.resume.presentation.SlideState
-import com.example.cleanarchitecture.feature.resume.presentation.SlideViewModel
-import kotlinx.android.synthetic.main.slider_second_fragment.view.*
+import com.example.cleanarchitecture.feature.resume.presentation.edit.SlideState
+import com.example.cleanarchitecture.feature.resume.presentation.edit.SlideViewModel
 import kotlinx.android.synthetic.main.slider_third_fragment.view.*
 
-class SliderThirdScreenFragment : Fragment() {
+class AboutFragment : Fragment() {
 
     private val viewModel: SlideViewModel by activityViewModels()
 
