@@ -10,8 +10,8 @@ import com.example.cleanarchitecture.feature.resume.domain.DeleteResumeUseCase
 import com.example.cleanarchitecture.feature.resume.domain.ResumeRepository
 import com.example.cleanarchitecture.feature.resume.domain.SaveResumeUseCase
 import com.example.cleanarchitecture.feature.resume.domain.RetrieveResumeUseCase
-import com.example.cleanarchitecture.feature.resume.presentation.profile.ShowViewModel
-import com.example.cleanarchitecture.feature.resume.presentation.edit.SlideViewModel
+import com.example.cleanarchitecture.feature.resume.presentation.edit.EditViewModel
+import com.example.cleanarchitecture.feature.resume.presentation.profile.ProfileViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -46,16 +46,16 @@ var mainModule = module {
         )
     }
 
-    viewModel{(isEditing: Boolean) ->
-        SlideViewModel(
-            retrieveResumeUseCase = get(),
+    viewModel { (isEditing: Boolean) ->
+        EditViewModel(
+            isEditing = isEditing,
             saveResumeUseCase = get(),
-            isEditing = isEditing
+            retrieveResumeUseCase = get()
         )
     }
 
     viewModel {
-        ShowViewModel(
+        ProfileViewModel(
             retrieveResumeUseCase = get(),
             deleteResumeUseCase = get()
         )

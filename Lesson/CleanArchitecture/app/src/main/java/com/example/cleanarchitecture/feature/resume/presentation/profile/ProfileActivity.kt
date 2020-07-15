@@ -12,10 +12,11 @@ import com.example.cleanarchitecture.core.ResumeFormatter
 import com.example.cleanarchitecture.feature.resume.data.entity.Resume
 import com.example.cleanarchitecture.feature.resume.presentation.edit.EditActivity
 import kotlinx.android.synthetic.main.activity_show.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileActivity : AppCompatActivity() {
 
-    private val viewModel: ShowViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

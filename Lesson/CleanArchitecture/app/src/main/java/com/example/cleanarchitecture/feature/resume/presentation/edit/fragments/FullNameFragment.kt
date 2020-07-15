@@ -10,12 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.feature.resume.presentation.edit.SlideState
-import com.example.cleanarchitecture.feature.resume.presentation.edit.SlideViewModel
+import com.example.cleanarchitecture.feature.resume.presentation.edit.EditViewModel
 import kotlinx.android.synthetic.main.slider_first_fragment.view.*
 
 class FullNameFragment : Fragment() {
 
-    private val viewModel: SlideViewModel by activityViewModels()
+    private val viewModel: EditViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

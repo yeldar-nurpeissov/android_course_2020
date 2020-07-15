@@ -8,7 +8,7 @@ import com.example.cleanarchitecture.feature.resume.data.entity.Resume
 import com.example.cleanarchitecture.feature.resume.domain.DeleteResumeUseCase
 import com.example.cleanarchitecture.feature.resume.domain.RetrieveResumeUseCase
 
-class ShowViewModel(
+class ProfileViewModel(
     private val retrieveResumeUseCase: RetrieveResumeUseCase,
     private val deleteResumeUseCase: DeleteResumeUseCase
 ): ViewModel() {

@@ -15,7 +15,7 @@ import org.koin.core.parameter.parametersOf
 
 class EditActivity : AppCompatActivity() {
 
-    private val viewModel: SlideViewModel by viewModel{
+    private val viewModel: EditViewModel by viewModel{
         parametersOf(intent?.getBooleanExtra(EDITING_STATE_KEY, false) ?: false)
     }
 

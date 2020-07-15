@@ -9,7 +9,7 @@ import com.example.cleanarchitecture.feature.resume.data.entity.Resume
 import com.example.cleanarchitecture.feature.resume.domain.RetrieveResumeUseCase
 import com.example.cleanarchitecture.feature.resume.domain.SaveResumeUseCase
 
-class SlideViewModel(
+class EditViewModel(
     private val saveResumeUseCase: SaveResumeUseCase,
     private val retrieveResumeUseCase: RetrieveResumeUseCase,
     private val isEditing: Boolean
