@@ -1,8 +1,8 @@
-package com.example.myapplication.data.datasource
+package com.example.myapplication.main.data.datasource
 
 import android.content.SharedPreferences
 import android.util.Log
-import com.example.myapplication.data.entity.User
+import com.example.myapplication.main.domain.entity.User
 
 interface LocalDataSource{
     fun saveUser(user: User)

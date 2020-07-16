@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation
+package com.example.myapplication.main.presentation.detailOfUser
 
 import android.app.Dialog
 import android.content.Intent
@@ -9,25 +9,21 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.myapplication.R
-import com.example.myapplication.core.DependencyInjection
-import com.example.myapplication.data.entity.User
-import com.example.myapplication.presentation.viewmodel.GetDetailViewModel
+import com.example.myapplication.main.domain.entity.User
+import com.example.myapplication.main.presentation.enterInfo.FillInActivity
 import kotlinx.android.synthetic.main.activity_detail.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val EDIT_ACTION = "EDIT"
 class DetailActivity: AppCompatActivity() {
     lateinit var dialogEdit: Dialog
     lateinit var dialogRemove: Dialog
-    private var di: DependencyInjection?= null
 
-    private val viewModel: GetDetailViewModel by lazy {
-        di!!.getGetDetailViewModel()
-    }
+    private val viewModel: GetDetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        di = DependencyInjection.getInstance(this)
         initDialog()
 
         initListener()
@@ -85,12 +81,12 @@ class DetailActivity: AppCompatActivity() {
     }
 
     private fun goToBlankActivity(){
-        startActivity(Intent(this, MainActivity1::class.java))
+        startActivity(Intent(this, FillInActivity::class.java))
         finish()
     }
 
     private fun goToEditActivity(){
-        val intent = Intent(this, MainActivity1::class.java)
+        val intent = Intent(this, FillInActivity::class.java)
         intent.putExtra(EDIT_ACTION, true)
         startActivity(intent)
         finish()

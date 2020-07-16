@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation
+package com.example.myapplication.main.presentation.enterInfo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,19 +9,15 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
-import com.example.myapplication.core.DependencyInjection
-import com.example.myapplication.data.entity.User
-import com.example.myapplication.presentation.viewmodel.NameViewModel
-import com.example.myapplication.presentation.viewmodel.SetUIState
+import com.example.myapplication.main.domain.entity.User
 import kotlinx.android.synthetic.main.fragment_name.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class NameFragment : Fragment() {
-    private var di: DependencyInjection?=null
+class FullNameFragment : Fragment() {
 
-    private val viewModel: NameViewModel by lazy {
-        di!!.getNameViewModel()
-    }
+
+    private val viewModel: FullNameViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +28,6 @@ class NameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        di = DependencyInjection.getInstance(context!!)
 
         initListener()
         observeViewModel()
@@ -48,7 +43,7 @@ class NameFragment : Fragment() {
     }
 
     private fun observeViewModel(){
-        viewModel.authState.observe(this, Observer {state ->
+        viewModel.authState.observe(viewLifecycleOwner, Observer {state ->
             when (state){
                 is SetUIState.Error -> showToast(state.throwable.message)
                 is SetUIState.ValidationError -> showToast(state.message)

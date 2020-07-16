@@ -1,4 +1,4 @@
-package com.example.myapplication.data.entity
+package com.example.myapplication.main.domain.entity
 
 data class User(
     var name: String,

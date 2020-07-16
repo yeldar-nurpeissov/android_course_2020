@@ -1,14 +1,15 @@
-package com.example.myapplication.presentation.viewmodel
+package com.example.myapplication.main.presentation.detailOfUser
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.myapplication.data.entity.User
-import com.example.myapplication.domain.DeleteUseCase
-import com.example.myapplication.domain.GetUseCase
+import androidx.lifecycle.ViewModel
+import com.example.myapplication.main.domain.entity.User
+import com.example.myapplication.main.domain.usecases.DeleteUseCase
+import com.example.myapplication.main.domain.usecases.GetUseCase
 
 class GetDetailViewModel(
     private val getUseCase: GetUseCase, private val deleteUseCase: DeleteUseCase
-){
+): ViewModel(){
     val getUserEvent: LiveData<GetUserEvent> get() = _getUserEvent
     private val _getUserEvent = MutableLiveData<GetUserEvent>()
 

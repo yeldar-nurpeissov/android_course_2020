@@ -1,6 +1,7 @@
-package com.example.myapplication.domain
+package com.example.myapplication.main.domain.usecases
 
 import com.example.myapplication.core.Resource
+import com.example.myapplication.main.domain.Repository
 
 class SetNameUseCase(
     private val repository: Repository

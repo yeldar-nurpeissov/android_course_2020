@@ -1,6 +1,6 @@
-package com.example.myapplication.domain
+package com.example.myapplication.main.domain.usecases
 
-import com.example.myapplication.data.entity.User
+import com.example.myapplication.main.domain.Repository
 
 class ExistUseCase (
     private val repository: Repository

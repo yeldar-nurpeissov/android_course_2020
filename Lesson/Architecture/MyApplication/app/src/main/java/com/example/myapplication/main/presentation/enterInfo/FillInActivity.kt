@@ -1,27 +1,24 @@
-package com.example.myapplication.presentation
+package com.example.myapplication.main.presentation.enterInfo
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.myapplication.R
-import com.example.myapplication.adapter.ViewPagerAdapter
-import com.example.myapplication.core.DependencyInjection
-import com.example.myapplication.presentation.viewmodel.EntryViewModel
-import com.example.myapplication.presentation.viewmodel.GetDetailViewModel
+import com.example.myapplication.main.presentation.enterInfo.adapter.ViewPagerAdapter
+import com.example.myapplication.main.presentation.detailOfUser.DetailActivity
+import com.example.myapplication.main.presentation.detailOfUser.EDIT_ACTION
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity1: AppCompatActivity() {
-    private var di: DependencyInjection?= null
+class FillInActivity: AppCompatActivity() {
 
-    private val viewModel: EntryViewModel by lazy {
-        di!!.getExistViewModel()
-    }
+    private val viewModel: FillInViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        di = DependencyInjection.getInstance(this)
+
 
         val edit = intent.getBooleanExtra(EDIT_ACTION, false)
         if (!edit) {

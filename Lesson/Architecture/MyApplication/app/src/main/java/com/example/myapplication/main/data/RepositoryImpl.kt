@@ -1,10 +1,10 @@
-package com.example.myapplication.data
+package com.example.myapplication.main.data
 
 import android.util.Log
 import com.example.myapplication.core.Resource
-import com.example.myapplication.data.datasource.LocalDataSource
-import com.example.myapplication.data.entity.User
-import com.example.myapplication.domain.Repository
+import com.example.myapplication.main.data.datasource.LocalDataSource
+import com.example.myapplication.main.domain.entity.User
+import com.example.myapplication.main.domain.Repository
 
 class RepositoryImpl(
     private val localDataSource:LocalDataSource
@@ -42,12 +42,21 @@ class RepositoryImpl(
         return try{
             user.about = about
             Log.d("RepositoryAdil", user.toString())
+            setUser(user)
+        }catch (throwable: Throwable){
+            Resource.Error(throwable)
+        }
+    }
+
+    override fun setUser(user: User): Resource<Unit> {
+        return try {
             localDataSource.saveUser(user)
             Resource.Success(Unit)
         }catch (throwable: Throwable){
             Resource.Error(throwable)
         }
     }
+
 
     override fun getMyUser(): User? = localDataSource.getUser()
 
