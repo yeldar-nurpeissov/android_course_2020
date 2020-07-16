@@ -25,22 +25,22 @@ val mainModule = module {
     single<Repository> {
         RepositoryImpl(get())
     }
-    single {
+    factory {
         DeleteUseCase(get())
     }
-    single {
+    factory {
         ExistUseCase(get())
     }
-    single {
+    factory {
         GetUseCase(get())
     }
-    single {
+    factory {
         SetAboutUseCase(get())
     }
-    single {
+    factory {
         SetDetailUseCase(get())
     }
-    single {
+    factory {
         SetNameUseCase(get())
     }
     viewModel {
