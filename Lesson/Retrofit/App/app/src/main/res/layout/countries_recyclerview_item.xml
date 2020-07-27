@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/covidCountryNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:layout_margin="4dp"
+        tools:text="Kazakhstan"/>
+
+    <TextView
+        android:id="@+id/covidCountryIsoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_margin="4dp"
+        tools:text="KZ"/>
+
+</FrameLayout>

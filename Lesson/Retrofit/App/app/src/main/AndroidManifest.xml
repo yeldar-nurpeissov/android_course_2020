@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.presentation.QuoteOfDayActivity">
+        <activity android:name="com.example.retrofit.feature.covid19.presentation.detailed.CountryDetailsActivity"/>
+        <activity android:name="com.example.retrofit.feature.covid19.presentation.countries.CovidCountriesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
