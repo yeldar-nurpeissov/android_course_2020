@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.observe
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -51,16 +52,16 @@ class MainActivity : AppCompatActivity() {
     private fun onButtonClicked(accessLevel: AccessLevel) {
         val name = userNameEditText.text.toString()
         val ageString = userAgeEditText.text.toString()
-        val age = if(ageString.isNotBlank() && ageString.isDigitsOnly())ageString.toInt() else 0
+        val age = if (ageString.isNotBlank() && ageString.isDigitsOnly()) ageString.toInt() else 0
         viewModel.onSaveUserClicked(name, age, accessLevel)
     }
 
     private fun observeViewModel() {
-        viewModel.users.observe(this, adapter::submitList)
+        adapter.submitList(viewModel.users)
     }
 }
 
-class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(diffUtil) {
+class UserAdapter : PagedListAdapter<User, UserAdapter.UserViewHolder>(diffUtil) {
 
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -84,6 +85,9 @@ class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(diffUtil) {
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val item = getItem(position)
+        if (item == null) {
+            throw NullPointerException("item=$item position = $position")
+        }
         holder.itemView.userIdTextView.text = item.id.toString()
         holder.itemView.userNameTextView.text = item.name + " " + item.age
         holder.itemView.accessLevelTextView.text = item.accessLevel.name
