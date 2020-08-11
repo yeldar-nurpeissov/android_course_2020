@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/text_fragment_destination">
+
+    <fragment
+        android:id="@+id/text_fragment_destination"
+        android:name="com.example.navigation.TextFragment"
+        android:label="Text fragment"
+        tools:layout="@layout/fragment_text">
+
+        <action
+            android:id="@+id/open_button_action"
+            app:destination="@id/button_fragment_destination"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/button_fragment_destination"
+        android:name="com.example.navigation.ButtonFragment"
+        android:label="Button fragment"
+        tools:layout="@layout/fragment_button">
+
+    </fragment>
+
+</navigation>
